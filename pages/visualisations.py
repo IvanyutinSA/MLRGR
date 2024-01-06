@@ -1,4 +1,3 @@
-from itertools import combinations
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,7 +8,7 @@ st.sidebar.markdown("Web3")
 st.sidebar.markdown("# Visualisations")
 
 
-df = pd.read_csv('airlines.csv')[:50000]
+df = pd.read_csv('airlines.csv').drop('Unnamed: 0', axis=1)[:500]
 numerical_features = ['Flight', 'DayOfWeek', 'Time', 'Length']
 
 st.markdown('# Корреляция признаков')
@@ -18,8 +17,9 @@ plt.show()
 
 st.pyplot(plot.get_figure())
 
-st.markdown('# Скаттерплоты всех признаков')
+st.markdown('# Парные плоты всех признаков')
 
 fig = plt.figure(figsize=(15,15))
 plot = sns.pairplot(df[numerical_features + ['Delay']], hue='Delay')
-st.pyplot(fig)
+st.pyplot(plot)
+
